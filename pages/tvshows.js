@@ -45,16 +45,25 @@ class Tvshows extends Component {
                     <div className="column-24">
                         <h1>TV Shows</h1>
                     </div>
-                    <input type="text" onChange={this.handleInputChange} onKeyDown={this.handleInputKeyPress} />
-                    <button onClick={this.getTvShows}>Submit</button>
-                    <ul>
-                        {shows}
-                    </ul>
+                    <div className="column-8 center-column">
+                        <div className="input-group">
+                            <input className="input-group-input" type="text" placeholder="Enter TV Show" onChange={this.handleInputChange} onKeyDown={this.handleInputKeyPress} />
+                            <span className="input-group-button">
+                                <button className="btn" onClick={this.getTvShows}>Submit</button>
+                            </span>
+                        </div>
+                    </div>
+                    <div className="column-24">
+                        <ul>
+                            {shows}
+                        </ul>
+                    </div>
                 </div>
             </Layout>
         );
     }
 }
+
 
 // --- This code may be useful if we want an initial fetch from the api ---
 // Tvshows.getInitialProps = async function () {
