@@ -6,18 +6,30 @@ class Tvshows extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            shows: []
+            shows: [],
+            inputValue: ''
         };
     }
 
-    handleClick = async (event) => {
-        console.log('Clicked');
-        const res = await fetch('https://api.tvmaze.com/search/shows?q=batman')
+    getTvShows = async () => {
+        const res = await fetch('https://api.tvmaze.com/search/shows?q=' + this.state.inputValue)
         const data = await res.json()
 
         this.setState({
             shows: data.map(entry => entry.show)
         });
+    }
+
+    handleInputChange = (event) => {
+        this.setState({
+            inputValue: event.target.value
+        });
+    }
+
+    handleInputKeyPress = (event) => {
+        if (event.keyCode === 13) {
+            this.getTvShows();
+        }
     }
 
     render() {
@@ -33,7 +45,8 @@ class Tvshows extends Component {
                     <div className="column-24">
                         <h1>TV Shows</h1>
                     </div>
-                    <button onClick={this.handleClick}>Fetch</button>
+                    <input type="text" onChange={this.handleInputChange} onKeyDown={this.handleInputKeyPress} />
+                    <button onClick={this.getTvShows}>Submit</button>
                     <ul>
                         {shows}
                     </ul>
