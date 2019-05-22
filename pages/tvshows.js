@@ -1,6 +1,7 @@
 import Layout from '../components/Layout';
 import fetch from 'isomorphic-unfetch';
 import { Component } from 'react';
+import Tvcard from '../components/Tvcard';
 
 class Tvshows extends Component {
     constructor(props) {
@@ -36,15 +37,7 @@ class Tvshows extends Component {
         let showCards = [];
         if (this.state.shows.length > 0) {
             showCards = this.state.shows.map(show => (
-                <div key={show.id} className="card block trailer-1">
-                    <figure className="card-image-wrap">
-                        <img className="card-image" src={show.image.medium} alt={show.name} />
-                    </figure>
-                    <div className="card-content">
-                        <h4><a href={show.url} target="_blank">{show.name}</a></h4>
-                        <p className="font-size--1 card-last" dangerouslySetInnerHTML={{ __html: show.summary }}></p>
-                    </div>
-                </div>
+                <Tvcard show={show} />
             ));
         }
         return (
