@@ -9,7 +9,7 @@ const Home = () => (
             </div>
             <div className="column-24">
                 <ul>
-                    <li><Link href="/tvshows"><a>TV Shows</a></Link></li>
+                    <li><Link href="/tvshowfinder"><a>TV Show Finder</a></Link></li>
                 </ul>
             </div>
         </div>

@@ -1,7 +1,7 @@
 import Layout from '../components/Layout';
 import fetch from 'isomorphic-unfetch';
 import { Component } from 'react';
-import Tvcard from '../components/Tvcard';
+import Showcard from '../components/Showcard';
 
 class Tvshows extends Component {
     constructor(props) {
@@ -37,14 +37,14 @@ class Tvshows extends Component {
         let showCards = [];
         if (this.state.shows.length > 0) {
             showCards = this.state.shows.map(show => (
-                <Tvcard show={show} />
+                <Showcard show={show} />
             ));
         }
         return (
             <Layout>
                 <div className="grid-container leader-1">
                     <div className="column-24">
-                        <h1>TV Shows</h1>
+                        <h1>TV Show Finder</h1>
                     </div>
                     <div className="column-8 center-column">
                         <div className="input-group">

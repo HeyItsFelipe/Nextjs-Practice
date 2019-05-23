@@ -1,4 +1,4 @@
-const Tvcard = ({ show }) => (
+const showCard = ({ show }) => (
     <div key={show.id} className="card block trailer-1">
         <figure className="card-image-wrap">
             <img className="card-image" src={show.image.medium} alt={show.name} />
@@ -11,4 +11,4 @@ const Tvcard = ({ show }) => (
 
 );
 
-export default Tvcard;
+export default showCard;
