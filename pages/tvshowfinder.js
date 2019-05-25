@@ -27,6 +27,7 @@ class Tvshows extends Component {
         });
     }
 
+    // Tv show data is fetched from api when enter key is pressed.
     handleInputKeyPress = (event) => {
         if (event.keyCode === 13) {
             this.getTvShows();
@@ -42,7 +43,8 @@ class Tvshows extends Component {
                     </div>
                     <div className="column-8 center-column">
                         <div className="input-group">
-                            <input className="input-group-input" type="text" placeholder="Enter TV Show" onChange={this.handleInputChange} onKeyDown={this.handleInputKeyPress} />
+                            <input className="input-group-input" type="text" placeholder="Enter TV Show"
+                                onChange={this.handleInputChange} onKeyDown={this.handleInputKeyPress} />
                             <span className="input-group-button">
                                 <button className="btn" onClick={this.getTvShows}>Submit</button>
                             </span>
