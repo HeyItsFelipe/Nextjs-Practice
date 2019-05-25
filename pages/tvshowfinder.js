@@ -1,7 +1,7 @@
 import Layout from '../components/Layout';
 import fetch from 'isomorphic-unfetch';
 import { Component } from 'react';
-import Showcard from '../components/Showcard';
+import Showgallery from '../components/Showgallery';
 
 class Tvshows extends Component {
     constructor(props) {
@@ -34,12 +34,6 @@ class Tvshows extends Component {
     }
 
     render() {
-        let showCards = [];
-        if (this.state.shows.length > 0) {
-            showCards = this.state.shows.map(show => (
-                <Showcard show={show} />
-            ));
-        }
         return (
             <Layout>
                 <div className="grid-container leader-1">
@@ -54,13 +48,7 @@ class Tvshows extends Component {
                             </span>
                         </div>
                     </div>
-                    <div className="column-24 leader-1">
-                        <div className="column-18 pre-3">
-                            <div className="block-group block-group-3-up">
-                                {showCards}
-                            </div>
-                        </div>
-                    </div>
+                    <Showgallery shows={this.state.shows} />
                 </div>
             </Layout>
         );

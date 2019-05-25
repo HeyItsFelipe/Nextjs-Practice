@@ -1,5 +1,5 @@
 const showCard = ({ show }) => (
-    <div key={show.id} className="card block trailer-1">
+    <div className="card block trailer-1">
         {show.image ?
             <figure className="card-image-wrap">
                 <img className="card-image" src={show.image.medium} alt={show.name} />
