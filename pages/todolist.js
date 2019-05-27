@@ -34,6 +34,13 @@ function Todolist() {
         setInputValue('');
     };
 
+    // New list item is added when enter key is pressed.
+    const handleInputKeyPress = (event) => {
+        if (event.keyCode === 13) {
+            handleSubmit();
+        }
+    };
+
     return (
         <Layout>
             <div className="grid-container leader-1">
@@ -43,13 +50,15 @@ function Todolist() {
                 <div className="column-8 post-16">
                     <div className="input-group">
                         <input className="input-group-input" type="text" placeholder="Enter To Do Item"
-                            onChange={handleInputChange} value={inputValue} />
+                            value={inputValue} onChange={handleInputChange} onKeyDown={handleInputKeyPress} />
                         <span className="input-group-button">
                             <button className="btn" onClick={handleSubmit}>Submit</button>
                         </span>
                     </div>
                 </div>
-                {list.map((listItem, index) => <div key={index}>{listItem.value}</div>)}
+                <ul>
+                    {list.map((listItem, index) => <li key={index}>{listItem.value}</li>)}
+                </ul>
             </div>
         </Layout>
     );
