@@ -22,7 +22,17 @@ function Todolist() {
 
     const handleInputChange = (event) => {
         setInputValue(event.target.value);
-    }
+    };
+
+    const handleSubmit = () => {
+        let newItem = {
+            value: inputValue,
+            isCompleted: false
+        };
+        let newTodo = [...list, newItem];
+        setList(newTodo);
+        setInputValue('');
+    };
 
     return (
         <Layout>
@@ -33,9 +43,9 @@ function Todolist() {
                 <div className="column-8 post-16">
                     <div className="input-group">
                         <input className="input-group-input" type="text" placeholder="Enter To Do Item"
-                            onChange={handleInputChange} />
+                            onChange={handleInputChange} value={inputValue} />
                         <span className="input-group-button">
-                            <button className="btn">Submit</button>
+                            <button className="btn" onClick={handleSubmit}>Submit</button>
                         </span>
                     </div>
                 </div>
