@@ -10,6 +10,7 @@ const Home = () => (
             <div className="column-24">
                 <ul>
                     <li><Link href="/tvshowfinder"><a>TV Show Finder</a></Link></li>
+                    <li><Link href="/todolist"><a>To Do List</a></Link></li>
                 </ul>
             </div>
         </div>

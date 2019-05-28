@@ -1,4 +1,5 @@
 import Layout from '../components/Layout';
+import ToDoListItem from '../components/ToDoListItem';
 import { useState } from 'react';
 
 function Todolist() {
@@ -56,9 +57,9 @@ function Todolist() {
                         </span>
                     </div>
                 </div>
-                <ul>
-                    {list.map((listItem, index) => <li key={index}>{listItem.value}</li>)}
-                </ul>
+
+                {list.map((listItem, index) => <ToDoListItem key={index} listItem={listItem} />)}
+
             </div>
         </Layout>
     );
