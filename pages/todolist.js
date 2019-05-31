@@ -30,8 +30,8 @@ function Todolist() {
             value: inputValue,
             isCompleted: false
         };
-        let newTodo = [...list, newItem];
-        setList(newTodo);
+        let newList = [...list, newItem];
+        setList(newList);
         setInputValue('');
     };
 
@@ -41,6 +41,11 @@ function Todolist() {
             handleSubmit();
         }
     };
+
+    const deleteListItem = (index) => {
+        let newList = list.slice(0, index).concat(list.slice(index + 1));
+        setList(newList);
+    }
 
     return (
         <Layout>
@@ -58,7 +63,7 @@ function Todolist() {
                     </div>
                 </div>
 
-                {list.map((listItem, index) => <ToDoListItem key={index} listItem={listItem} />)}
+                {list.map((listItem, index) => <ToDoListItem key={index} index={index} listItem={listItem} deleteListItem={deleteListItem} />)}
 
             </div>
         </Layout>
