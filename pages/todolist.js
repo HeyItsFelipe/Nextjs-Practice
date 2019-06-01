@@ -43,15 +43,15 @@ function Todolist() {
     };
 
     const deleteListItem = (index) => {
-        let newList = list.slice(0, index).concat(list.slice(index + 1));
+        let newList = [...list];
+        newList.splice(index, 1);
         setList(newList);
     }
 
     const strikeListItem = (index) => {
-        let strikedListItem = list.splice(index, 1)[0];
-        strikedListItem.isComplete = !strikedListItem.isComplete;
-        let updatedList = list.slice(0, index).concat([strikedListItem], list.slice(index));
-        setList(updatedList);
+        let newList = [...list];
+        newList[index].isComplete = !newList[index].isComplete;
+        setList(newList);
     }
 
     return (
