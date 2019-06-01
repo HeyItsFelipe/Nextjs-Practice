@@ -7,15 +7,15 @@ function Todolist() {
     const [list, setList] = useState([
         {
             value: 'Study',
-            isCompleted: false
+            isComplete: false
         },
         {
             value: 'Eat',
-            isCompleted: false
+            isComplete: false
         },
         {
             value: 'Sleep',
-            isCompleted: false
+            isComplete: false
         }
 
     ]);
@@ -28,7 +28,7 @@ function Todolist() {
     const handleSubmit = () => {
         let newItem = {
             value: inputValue,
-            isCompleted: false
+            isComplete: false
         };
         let newList = [...list, newItem];
         setList(newList);
@@ -47,6 +47,13 @@ function Todolist() {
         setList(newList);
     }
 
+    const strikeListItem = (index) => {
+        let strikedListItem = list.splice(index, 1)[0];
+        strikedListItem.isComplete = !strikedListItem.isComplete;
+        let updatedList = list.slice(0, index).concat([strikedListItem], list.slice(index));
+        setList(updatedList);
+    }
+
     return (
         <Layout>
             <div className="grid-container leader-1">
@@ -63,7 +70,14 @@ function Todolist() {
                     </div>
                 </div>
 
-                {list.map((listItem, index) => <ToDoListItem key={index} index={index} listItem={listItem} deleteListItem={deleteListItem} />)}
+                {list.map((listItem, index) =>
+                    <ToDoListItem
+                        key={index}
+                        index={index}
+                        listItem={listItem}
+                        deleteListItem={deleteListItem}
+                        strikeListItem={strikeListItem}
+                    />)}
 
             </div>
         </Layout>
