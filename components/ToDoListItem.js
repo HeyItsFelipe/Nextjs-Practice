@@ -1,8 +1,8 @@
 const ToDoListItem = ({ listItem, index, deleteListItem, strikeListItem }) => (
-    <div className="column-8 post-16 leader-1">
-        <div className="column-6">
-            <span className="font-size-4" style={{ textDecoration: listItem.isComplete ? 'line-through' : '' }}>
-                {listItem.value}
+    <div className="column-24 leader-1">
+        <div className="column-20">
+            <span className="font-size-4" style={{ textDecoration: listItem.completed ? 'line-through' : '' }}>
+                {listItem.title}
             </span>
         </div>
         <button className="btn-red btn-grouped">

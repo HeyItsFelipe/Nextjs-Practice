@@ -1,24 +1,12 @@
 import Layout from '../components/Layout';
 import ToDoListItem from '../components/ToDoListItem';
+import fetch from 'isomorphic-unfetch';
+
 import { useState } from 'react';
 
-function Todolist() {
+function Todolist({ fetchedList }) {
 
-    const [list, setList] = useState([
-        {
-            value: 'Study',
-            isComplete: false
-        },
-        {
-            value: 'Eat',
-            isComplete: false
-        },
-        {
-            value: 'Sleep',
-            isComplete: false
-        }
-
-    ]);
+    const [list, setList] = useState(fetchedList);
     const [inputValue, setInputValue] = useState('');
 
     const handleInputChange = (event) => {
@@ -27,8 +15,8 @@ function Todolist() {
 
     const handleSubmit = () => {
         let newItem = {
-            value: inputValue,
-            isComplete: false
+            title: inputValue,
+            completed: false
         };
         let newList = [...list, newItem];
         setList(newList);
@@ -50,7 +38,7 @@ function Todolist() {
 
     const strikeListItem = (index) => {
         let newList = [...list];
-        newList[index].isComplete = !newList[index].isComplete;
+        newList[index].completed = !newList[index].completed;
         setList(newList);
     }
 
@@ -83,6 +71,15 @@ function Todolist() {
         </Layout>
     );
 
+}
+
+Todolist.getInitialProps = async () => {
+    const res = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=5')
+    const data = await res.json()
+
+    return {
+        fetchedList: data
+    }
 }
 
 export default Todolist;
