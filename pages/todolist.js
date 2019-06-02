@@ -19,6 +19,17 @@ function Todolist({ fetchedList }) {
             completed: false
         };
         let newList = [...list, newItem];
+
+        fetch('https://jsonplaceholder.typicode.com/posts', {
+            method: 'POST',
+            body: JSON.stringify(newItem),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            .then(response => response.json())
+            .then(json => console.log(json))
+
         setList(newList);
         setInputValue('');
     };
