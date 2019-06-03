@@ -4,13 +4,35 @@ import fetch from 'isomorphic-unfetch';
 
 import { useState } from 'react';
 
-function Todolist({ fetchedList }) {
+// Invoked by Todolist.getInitialProps to fetch todo list items upon initial render.
+const fetchTodoList = async () => {
+    const res = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=5')
+    const data = await res.json()
 
-    const [list, setList] = useState(fetchedList);
+    return {
+        fetchedTodoList: data
+    }
+};
+
+function Todolist({ fetchedTodoList }) {
+
+    const [list, setList] = useState(fetchedTodoList);
     const [inputValue, setInputValue] = useState('');
 
     const handleInputChange = (event) => {
         setInputValue(event.target.value);
+    };
+
+    const postTodoItem = (item) => {
+        fetch('https://jsonplaceholder.typicode.com/posts', {
+            method: 'POST',
+            body: JSON.stringify(item),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            .then(response => response.json())
+            .then(json => console.log(json))
     };
 
     const handleSubmit = () => {
@@ -18,21 +40,16 @@ function Todolist({ fetchedList }) {
             title: inputValue,
             completed: false
         };
+
+        // Adds new list item to database.
+        postTodoItem(newItem);
+
+        // Adds new list item to user interface.
         let newList = [...list, newItem];
-
-        fetch('https://jsonplaceholder.typicode.com/posts', {
-            method: 'POST',
-            body: JSON.stringify(newItem),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        })
-            .then(response => response.json())
-            .then(json => console.log(json))
-
         setList(newList);
         setInputValue('');
     };
+
 
     // New list item is added when enter key is pressed.
     const handleInputKeyPress = (event) => {
@@ -84,13 +101,9 @@ function Todolist({ fetchedList }) {
 
 }
 
+// Loads list by invoking fetchTodoList.
 Todolist.getInitialProps = async () => {
-    const res = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=5')
-    const data = await res.json()
-
-    return {
-        fetchedList: data
-    }
+    return await fetchTodoList();
 }
 
 export default Todolist;
